@@ -114,9 +114,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Cloudinary for production media
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'disg6xlda',
-    'API_KEY': '275963666743887',
-    'API_SECRET': '2dXx4zpFk0xiAV9q6O8_69-QXB4',
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 print(cloudinary.config().cloud_name)  # disg6xlda
 print(cloudinary.config().api_key) 
