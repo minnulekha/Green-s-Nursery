@@ -6,7 +6,7 @@ from django.db import models
 class HeroSection(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True)
-    banner_image = models.ImageField(upload_to="hero/")
+    banner_image = models.ImageField()
     cta_text = models.CharField(max_length=50, default="Visit Us")
     cta_link = models.URLField(blank=True)
 
@@ -30,10 +30,10 @@ class Plant(models.Model):
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, default="Available")
 
     # Make image optional (used on other pages)
-    image = models.ImageField(upload_to="plants/", blank=True, null=True)
+    image = models.ImageField( blank=True, null=True)
 
     # New: optional video field for featured plants (mp4 recommended)
-    video = models.FileField(upload_to="plants/videos/", blank=True, null=True,
+    video = models.FileField( blank=True, null=True,
                              help_text="Upload MP4 (H.264) for best compatibility")
 
     is_featured = models.BooleanField(default=False)
@@ -52,7 +52,7 @@ class Plant(models.Model):
 class About(models.Model):
     story = models.TextField()
     mission = models.TextField(blank=True)
-    image = models.ImageField(upload_to="about/", blank=True)
+    image = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return "About Section"
@@ -63,11 +63,13 @@ class About(models.Model):
 class CareTip(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to="caretips/", blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(blank=True)
+    pdf_file = models.FileField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)  # <-- add this
 
     def __str__(self):
         return self.title
+
 
 # ---------------------------
 # 5. Videos
@@ -126,7 +128,7 @@ class ContactMessage(models.Model):
 # ---------------------------
 class Brochure(models.Model):
     title = models.CharField(max_length=200)  # kept for admin/reference
-    pdf_file = models.FileField(upload_to="brochures/", blank=True, null=True)  # PDF optional
+    pdf_file = models.FileField(blank=True, null=True)  # PDF optional
     description = models.TextField(blank=True)
     heyzine_link = models.URLField(
         max_length=500,
@@ -146,8 +148,8 @@ class Brochure(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='articles/images/', blank=True, null=True)
-    pdf = models.FileField(upload_to='articles/pdfs/', blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
+    pdf = models.FileField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
