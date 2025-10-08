@@ -8,6 +8,9 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
+from cloudinary_storage.storage import MediaCloudinaryStorage
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -109,9 +112,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Optional for dev
 # Cloudinary for production media
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+    'CLOUD_NAME': 'disg6xlda',
+    'API_KEY': '275963666743887',
+    'API_SECRET': '2dXx4zpFk0xiAV9q6O8_69-QXB4',
 }
 
 # Default primary key field type
