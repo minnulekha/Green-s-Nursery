@@ -18,6 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-#h(2h+d6_kkn&t$@tjz4q(r!u3rbk1wq=j^q^od5=cn_124=5v'
 DEBUG = False
+# Windows PowerShell
+
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -105,9 +107,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]  # Development static
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')        # Collected static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files (uploads)
-MEDIA_URL = '/media/'  # Optional for dev
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Optional for dev
+# # Media files (uploads)
+# MEDIA_URL = '/media/'  # Optional for dev
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Optional for dev
 
 # Cloudinary for production media
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -116,7 +118,8 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '275963666743887',
     'API_SECRET': '2dXx4zpFk0xiAV9q6O8_69-QXB4',
 }
-
+print(cloudinary.config().cloud_name)  # disg6xlda
+print(cloudinary.config().api_key) 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
