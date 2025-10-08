@@ -1,0 +1,482 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Greens Nursery{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Bring Nature to your Home</h1>
+      <a href="#about" class="btn">Visit Us</a>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features py-5">
+    <div class="container text-center">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 d-flex flex-column justify-content-center p-4">
+            <div class="card-body">
+              <i class="fa fa-check-circle"></i>
+              <h5 class="card-title fw-bold">No Hidden Cost</h5>
+              <p class="card-text">Transparent pricing with no extra charges.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 d-flex flex-column justify-content-center p-4">
+            <div class="card-body">
+              <i class="bi bi-people-fill"></i>
+              <h5 class="card-title fw-bold">Dedicated Team</h5>
+              <p class="card-text">Professional staff committed to quality.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 d-flex flex-column justify-content-center p-4">
+            <div class="card-body">
+              <i class="bi bi-telephone-fill"></i>
+              <h5 class="card-title fw-bold">24/7 Available</h5>
+              <p class="card-text">Always ready to assist you anytime.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-md-6">
+          {% if about and about.image %}
+          <img src="{{ about.image.url }}" class="img-fluid rounded shadow" alt="About Us">
+        {% else %}
+          <img src="{% static 'images/about.png' %}" class="img-fluid rounded shadow" alt="About Us">
+        {% endif %}
+        </div>
+        <div class="col-md-6">
+          <h2 class="fw-bold">We Make Your Home Like A Garden</h2>
+          <p>
+            Green’s Nursery was founded by Mr. Jayarajan S, a retired officer from the Kerala Police, whose lifelong passion for cultivation blossomed into this green haven. 
+            What began as a small hobby—growing fruits and plants on his own land—slowly grew into a dream venture. 
+          </p>
+          <p>
+            In 2018, while still in service, he started Green’s Nursery. After retiring, he dedicated himself fully to nurturing the nursery with the same discipline and care that defined his career. 
+            From a small beginning to a flourishing nursery, Green’s Nursery stands as a testament to passion, hard work, and love for nature.
+          </p>
+          <a href="{% url 'all_videos' %}" class="btn btn-success">Explore More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section py-5 bg-light">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+
+      <!-- Left Side: Contact Form -->
+      <div class="col-md-6">
+        <h6 class="text-success">Contact Us</h6>
+        <h2 class="fw-bold">If You Have Any Query,<br>Please Contact Us</h2>
+        <p>{{ contact_info.delivery_note }}</p>
+
+        <form method="POST" action="" class="mt-4">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="text" name="subject" class="form-control" placeholder="Subject">
+          </div>
+          <div class="mb-3">
+            <textarea name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Right Side: Map + Info -->
+<div class="col-md-6 d-flex flex-column justify-content-between text-end">
+
+  <!-- Google Map -->
+  <div class="mb-3 flex-grow-1">
+    {% if contact_info.map_embed_link %}
+      <iframe src="{{ contact_info.map_embed_link }}" 
+        width="100%" height="100%" 
+        style="border:0; min-height:250px;" 
+        allowfullscreen="" loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    {% endif %}
+  </div>
+
+  <!-- Contact Info -->
+  <div>
+    {% if contact_info.phone1 %}
+      <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
+       +91 {{ contact_info.phone1 }}<i class="bi bi-telephone text-success"></i> 
+      </p>
+    {% endif %}
+    {% if contact_info.phone2 %}
+      <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
+        <a>+91 {{ contact_info.phone2 }}<i class="bi bi-telephone text-success"></i> </a>
+      </p>
+    {% endif %}
+    <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
+      {{ contact_info.email }}<i class="bi bi-envelope text-success"></i> 
+    </p>
+    <p class="mb-3 d-flex justify-content-end align-items-center gap-2">
+      {{ contact_info.address }}<i class="bi bi-geo-alt text-success"></i> 
+    </p>
+
+    <!-- Social Media -->
+    <div class="d-flex justify-content-end">
+      {% if contact_info.facebook_url %}
+        <a href="{{ contact_info.facebook_url }}" target="_blank" class="ms-2"><i class="bi bi-facebook fs-4 text-primary"></i></a>
+      {% endif %}
+      {% if contact_info.instagram_url %}
+        <a href="{{ contact_info.instagram_url }}" target="_blank" class="ms-2"><i class="bi bi-instagram fs-4 text-danger"></i></a>
+      {% endif %}
+      {% if contact_info.twitter_url %}
+        <a href="{{ contact_info.twitter_url }}" target="_blank" class="ms-2"><i class="bi bi-twitter fs-4 text-info"></i></a>
+      {% endif %}
+      {% if contact_info.youtube_url %}
+        <a href="{{ contact_info.youtube_url }}" target="_blank" class="ms-2"><i class="bi bi-youtube fs-4 text-danger"></i></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Featured Plants Section -->
+<section id="plants" class="py-5">
+    <div class="container">
+        <h2 class="text-center text-success fw-bold mb-5">Featured Plants</h2>
+        <div class="row">
+            {% if plants %}
+                {% for plant in plants %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+
+                        <!-- Show ONLY Image in the Card -->
+                        {% if plant.image %}
+                            <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}">
+                        {% else %}
+                            <div class="bg-light text-center py-5 text-muted">
+                                <p>No image available</p>
+                            </div>
+                        {% endif %}
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">{{ plant.name }}</h5>
+                            <p class="card-text text-muted flex-grow-1">
+                                {{ plant.description|truncatewords:20 }}
+                            </p>
+                            {% if plant.price %}
+                                <p class="fw-bold text-success mb-2">₹{{ plant.price }}</p>
+                            {% endif %}
+                            <!-- Button to trigger modal -->
+                            <a href="#" class="btn btn-success btn-sm mt-auto" data-bs-toggle="modal" data-bs-target="#plantModal{{ plant.id }}">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal for Plant Details -->
+                <div class="modal fade" id="plantModal{{ plant.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ plant.name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- Video or Image inside Modal -->
+                                {% if plant.embed_video_url %}
+                                    {% if plant.is_youtube %}
+                                        <!-- YouTube Video -->
+                                        <div class="ratio ratio-16x9 mb-3">
+                                            <iframe
+                                                src="{{ plant.embed_video_url }}&autoplay=1&mute=1&loop=1&playlist={{ plant.youtube_id }}"
+                                                title="{{ plant.name }}"
+                                                frameborder="0"
+                                                allow="autoplay; encrypted-media"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    {% else %}
+                                        <!-- Uploaded MP4 Video -->
+                                        <div class="ratio ratio-16x9 mb-3">
+                                            <video autoplay loop muted playsinline controls class="w-100 rounded">
+                                                <source src="{{ plant.embed_video_url }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    {% endif %}
+                                {% elif plant.image %}
+                                    <!-- Fallback to Image -->
+                                    <img src="{{ plant.image.url }}" class="img-fluid rounded mb-3" alt="{{ plant.name }}">
+                                {% else %}
+                                    <p class="text-muted">No media available for this plant.</p>
+                                {% endif %}
+
+                                <p>{{ plant.description }}</p>
+                                {% if plant.price %}
+                                    <p class="fw-bold text-success">Price: ₹{{ plant.price }}</p>
+                                {% endif %}
+                                <p><strong>Availability:</strong> {{ plant.availability }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-muted">No plants available at the moment.</p>
+            {% endif %}
+        </div>
+
+        <!-- View All Plants Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'plants_list' %}" class="btn btn-outline-success btn-lg fw-bold rounded-pill px-4">
+                🌱 View All Plants
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Videos Section -->
+<section id="videos" class="py-5">
+  <div class="container">
+    <h2 class="text-center text-success fw-bold mb-5">Our Videos</h2>
+
+    <!-- Highlighted Intro Video -->
+    {% if intro_video and intro_video.embed_url %}
+    <div class="row gy-4 justify-content-between align-items-center mb-5">
+      <div class="col-lg-6 order-lg-2" data-aos="zoom-out">
+        <div class="ratio ratio-16x9 mb-3">
+          <iframe 
+            src="{{ intro_video.embed_url }}"
+            title="{{ intro_video.title|default:'YouTube Video' }}" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen 
+            class="rounded shadow"
+            frameborder="0"
+            loading="lazy">
+          </iframe>
+
+        </div>
+      </div>
+      <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="content-title mb-4">{{ intro_video.title }}</h2>
+        <p class="mb-4">{{ intro_video.description|default:"Check out this video!" }}</p>
+        <p><a href="#" class="btn-cta">Get in touch</a></p>
+      </div>
+    </div>
+    {% endif %}
+    <!-- End Highlighted -->
+
+<!-- Other Videos Preview Section -->
+<section id="other-videos" class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- Left Column: Two Latest Videos -->
+      <div class="col-md-7 mb-4 mb-md-0">
+        <h2 class="text-success fw-bold mb-4">Latest Videos</h2>
+        <div class="row g-4">
+          {% for video in other_videos|slice:":2" %}
+          {% if video.embed_url %}
+          <div class="col-md-6">
+            <div class="ratio ratio-16x9 shadow-sm rounded">
+              <iframe src="{{ video.embed_url }}" 
+                      title="{{ video.title }}" 
+                      frameborder="0" allowfullscreen></iframe>
+            </div>
+            <h5 class="mt-2 fw-bold">{{ video.title }}</h5>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Right Column: Show More -->
+      <div class="col-md-5 text-center text-md-start">
+        <h3 class="mb-3">Explore More Videos</h3>
+        <p class="mb-4">Check out all our videos and stay inspired! Click below to see the full collection.</p>
+        <a href="{% url 'all_videos' %}" class="btn btn-success btn-lg">Show More Videos</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Latest Short Video Section -->
+<section id="short" class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- Left Column: Vertical Video -->
+      <div class="col-md-6 mb-4 mb-md-0 text-center">
+        <h2 class="text-success fw-bold mb-3">Latest Short Video</h2>
+        {% if latest_short %}
+        <a href="{% url 'shorts' %}">
+          <div style="position: relative; width: 200px; max-width: 100%; padding-bottom: 355px; margin: 0 auto;">
+            <!-- 9:16 ratio for portrait -->
+            <iframe src="{{ latest_short.embed_url }}" 
+              title="{{ latest_short.title }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </iframe>
+          </div>
+        </a>
+        <p class="mt-2 small">{{ latest_short.title }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Text + Show More -->
+      <div class="col-md-6 text-center text-md-start">
+        <h3 class="mb-3">Explore More Reels</h3>
+        <p class="mb-4">
+          Check out all our short videos filled with tips, fun, and inspiration! Click below to see the full collection.
+        </p>
+        <a href="{% url 'shorts' %}" class="btn btn-success btn-lg">Show More Shorts</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Brochure Section -->
+<section id="brochure" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center text-success fw-bold mb-5">Brochure</h2>
+
+    {% if brochure %}
+      <!-- Flipbook Section -->
+      <div class="text-center mb-4">
+        {% if brochure.description %}
+          <p class="text-muted">{{ brochure.description }}</p>
+        {% endif %}
+
+        <!-- Embedded Heyzine Flipbook -->
+        <div style="width:100%; max-width:800px; margin:0 auto; height:80vh; border:1px solid #ccc; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+          <iframe src="{% if brochure.heyzine_link %}{{ brochure.heyzine_link }}{% else %}https://heyzine.com/flip-book/9c68d80c81.html{% endif %}" 
+                  style="width:100%; height:100%; border:0;" 
+                  allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+      </div>
+    {% else %}
+      <!-- Default Heyzine Flipbook -->
+      <div style="width:100%; max-width:800px; margin:0 auto; height:80vh; border:1px solid #ccc; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+        <iframe src="https://heyzine.com/flip-book/9c68d80c81.html" 
+                style="width:100%; height:100%; border:0;" 
+                allowfullscreen scrolling="no">
+        </iframe>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- Articles Section -->
+<section id="articles" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center text-success fw-bold mb-5">Articles</h2>
+    <div class="row">
+      {% for article in articles %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            {% if article.image %}
+              <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="card-text">{{ article.description|truncatewords:20 }}</p>
+            </div>
+            <div class="card-footer bg-white">
+              {% if article.pdf %}
+                <a href="{{ article.pdf.url }}" class="btn btn-success btn-sm" target="_blank">Read PDF</a>
+              {% endif %}
+              {% if article.image %}
+                <a href="{{ article.image.url }}" class="btn btn-outline-success btn-sm" target="_blank">View Image</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-center">No articles available yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} <!-- Care Tips Section -->
+<section id="care-tips" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center text-success fw-bold mb-5">Care Tips</h2>
+        <div class="row">
+            {% if care_tips %}
+                {% for tip in care_tips %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm text-center p-3">
+                        {% if tip.image %}
+                        <img src="{{ tip.image.url }}" class="card-img-top mb-3" alt="{{ tip.title }}">
+                        {% endif %}
+                        <h5 class="fw-bold">{{ tip.title }}</h5>
+                        <p class="text-muted">{{ tip.description|truncatewords:20 }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-muted">Care tips will be updated soon.</p>
+            {% endif %}
+        </div>
+    </div>
+</section> {% endcomment %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Select all plant modals
+    const modals = document.querySelectorAll('.modal');
+
+    modals.forEach(modal => {
+        modal.addEventListener('hidden.bs.modal', function (event) {
+            // Stop HTML5 video
+            const videos = modal.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+
+            // Stop YouTube iframe by resetting src
+            const iframes = modal.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = src;  // Reset the iframe to stop playback
+            });
+        });
+    });
+});
+</script>
+
+{% endblock %}

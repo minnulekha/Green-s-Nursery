@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}All Videos | Gardener{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center text-success fw-bold mb-5">All Videos</h2>
+    {% if videos %}
+    <div class="row g-4 justify-content-center">
+      {% for video in videos %}
+      <div class="col-md-4">
+        <div class="ratio ratio-16x9 shadow-sm rounded">
+          <iframe src="{{ video.embed_url }}" title="{{ video.title }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h5 class="mt-2 fw-bold text-center">{{ video.title }}</h5>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="text-center text-muted">Videos will be available soon.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
