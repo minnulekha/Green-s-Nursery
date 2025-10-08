@@ -23,17 +23,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#h(2h+d6_kkn&t$@tjz4q(r!u3rbk1wq=j^q^od5=cn_124=5v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '192.168.29.181',
-    '.ngrok-free.app',  # allows any subdomain of ngrok-free.app
+    '.ngrok-free.app',
+    'green-s-nursery.onrender.com'  
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://d24e5b501e01.ngrok-free.app",  # your current ngrok domain
+    "https://green-s-nursery.onrender.com",  
 ]
 
 
