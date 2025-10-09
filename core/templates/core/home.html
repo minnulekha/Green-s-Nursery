@@ -74,92 +74,7 @@
     </div>
   </section>
 
-<!-- Contact Section -->
-<section id="contact" class="contact-section py-5 bg-light">
-  <div class="container">
-    <div class="row g-4 align-items-stretch">
 
-      <!-- Left Side: Contact Form -->
-      <div class="col-md-6">
-        <h6 class="text-success">Contact Us</h6>
-        <h2 class="fw-bold">If You Have Any Query,<br>Please Contact Us</h2>
-        <p>{{ contact_info.delivery_note }}</p>
-
-        <form method="POST" action="" class="mt-4">
-          {% csrf_token %}
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-            </div>
-          </div>
-          <div class="mb-3">
-            <input type="text" name="subject" class="form-control" placeholder="Subject">
-          </div>
-          <div class="mb-3">
-            <textarea name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-success w-100">Send Message</button>
-        </form>
-      </div>
-
-      <!-- Right Side: Map + Info -->
-<div class="col-md-6 d-flex flex-column justify-content-between text-end">
-
-  <!-- Google Map -->
-  <div class="mb-3 flex-grow-1">
-    {% if contact_info.map_embed_link %}
-      <iframe src="{{ contact_info.map_embed_link }}" 
-        width="100%" height="100%" 
-        style="border:0; min-height:250px;" 
-        allowfullscreen="" loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-    {% endif %}
-  </div>
-
-  <!-- Contact Info -->
-  <div>
-    {% if contact_info.phone1 %}
-      <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
-       +91 {{ contact_info.phone1 }}<i class="bi bi-telephone text-success"></i> 
-      </p>
-    {% endif %}
-    {% if contact_info.phone2 %}
-      <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
-        <a>+91 {{ contact_info.phone2 }}<i class="bi bi-telephone text-success"></i> </a>
-      </p>
-    {% endif %}
-    <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
-      {{ contact_info.email }}<i class="bi bi-envelope text-success"></i> 
-    </p>
-    <p class="mb-3 d-flex justify-content-end align-items-center gap-2">
-      {{ contact_info.address }}<i class="bi bi-geo-alt text-success"></i> 
-    </p>
-
-    <!-- Social Media -->
-    <div class="d-flex justify-content-end">
-      {% if contact_info.facebook_url %}
-        <a href="{{ contact_info.facebook_url }}" target="_blank" class="ms-2"><i class="bi bi-facebook fs-4 text-primary"></i></a>
-      {% endif %}
-      {% if contact_info.instagram_url %}
-        <a href="{{ contact_info.instagram_url }}" target="_blank" class="ms-2"><i class="bi bi-instagram fs-4 text-danger"></i></a>
-      {% endif %}
-      {% if contact_info.twitter_url %}
-        <a href="{{ contact_info.twitter_url }}" target="_blank" class="ms-2"><i class="bi bi-twitter fs-4 text-info"></i></a>
-      {% endif %}
-      {% if contact_info.youtube_url %}
-        <a href="{{ contact_info.youtube_url }}" target="_blank" class="ms-2"><i class="bi bi-youtube fs-4 text-danger"></i></a>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-
-    </div>
-  </div>
-</section>
 
 
 <!-- Featured Plants Section -->
@@ -288,7 +203,7 @@
       <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
         <h2 class="content-title mb-4">{{ intro_video.title }}</h2>
         <p class="mb-4">{{ intro_video.description|default:"Check out this video!" }}</p>
-        <p><a href="#" class="btn-cta">Get in touch</a></p>
+        <p><a href="#" class="btn btn-success btn-lg">Get in touch</a></p>
       </div>
     </div>
     {% endif %}
@@ -364,7 +279,92 @@
     </div>
   </div>
 </section>
+<!-- Contact Section -->
+<section id="contact" class="contact-section py-5 bg-light">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
 
+      <!-- Left Side: Contact Form -->
+      <div class="col-md-6">
+        <h6 class="text-success">Contact Us</h6>
+        <h2 class="fw-bold">If You Have Any Query,<br>Please Contact Us</h2>
+        <p>{{ contact_info.delivery_note }}</p>
+
+        <form method="POST" action="" class="mt-4">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="text" name="subject" class="form-control" placeholder="Subject">
+          </div>
+          <div class="mb-3">
+            <textarea name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Right Side: Map + Info -->
+<div class="col-md-6 d-flex flex-column justify-content-between text-end">
+
+  <!-- Google Map -->
+  <div class="mb-3 flex-grow-1">
+    {% if contact_info.map_embed_link %}
+      <iframe src="{{ contact_info.map_embed_link }}" 
+        width="100%" height="100%" 
+        style="border:0; min-height:250px;" 
+        allowfullscreen="" loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    {% endif %}
+  </div>
+
+  <!-- Contact Info -->
+  <div>
+    {% if contact_info.phone1 %}
+      <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
+       +91 {{ contact_info.phone1 }}<i class="bi bi-telephone text-success"></i> 
+      </p>
+    {% endif %}
+    {% if contact_info.phone2 %}
+      <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
+        <a>+91 {{ contact_info.phone2 }}<i class="bi bi-telephone text-success"></i> </a>
+      </p>
+    {% endif %}
+    <p class="mb-1 d-flex justify-content-end align-items-center gap-2">
+      {{ contact_info.email }}<i class="bi bi-envelope text-success"></i> 
+    </p>
+    <p class="mb-3 d-flex justify-content-end align-items-center gap-2">
+      {{ contact_info.address }}<i class="bi bi-geo-alt text-success"></i> 
+    </p>
+
+    <!-- Social Media -->
+    <div class="d-flex justify-content-end">
+      {% if contact_info.facebook_url %}
+        <a href="{{ contact_info.facebook_url }}" target="_blank" class="ms-2"><i class="bi bi-facebook fs-4 text-primary"></i></a>
+      {% endif %}
+      {% if contact_info.instagram_url %}
+        <a href="{{ contact_info.instagram_url }}" target="_blank" class="ms-2"><i class="bi bi-instagram fs-4 text-danger"></i></a>
+      {% endif %}
+      {% if contact_info.twitter_url %}
+        <a href="{{ contact_info.twitter_url }}" target="_blank" class="ms-2"><i class="bi bi-twitter fs-4 text-info"></i></a>
+      {% endif %}
+      {% if contact_info.youtube_url %}
+        <a href="{{ contact_info.youtube_url }}" target="_blank" class="ms-2"><i class="bi bi-youtube fs-4 text-danger"></i></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</section>
 <!-- Brochure Section -->
 <section id="brochure" class="py-5 bg-light">
   <div class="container">
